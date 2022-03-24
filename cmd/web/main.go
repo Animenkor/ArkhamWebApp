@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/Animenkor/Athena/pkg/config"
-	"github.com/Animenkor/Athena/pkg/handlers"
-	"github.com/Animenkor/Athena/pkg/render"
+	"github.com/Animenkor/Athena/internal/config"
+	"github.com/Animenkor/Athena/internal/handlers"
+	"github.com/Animenkor/Athena/internal/render"
 	"github.com/alexedwards/scs/v2"
 	"log"
 	"net/http"
