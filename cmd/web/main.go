@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/Animenkor/Athena/internal/config"
-	"github.com/Animenkor/Athena/internal/handlers"
-	"github.com/Animenkor/Athena/internal/render"
+	"github.com/Animenkor/AthenaWebApp/internal/config"
+	"github.com/Animenkor/AthenaWebApp/internal/handlers"
+	"github.com/Animenkor/AthenaWebApp/internal/models"
+	"github.com/Animenkor/AthenaWebApp/internal/render"
 	"github.com/alexedwards/scs/v2"
 	"log"
 	"net/http"
@@ -42,6 +43,8 @@ func main() {
 	render.NewTemplates(&app)
 
 	fmt.Println(fmt.Sprintf("Starting application on port %s", portNumber))
+
+	models.FindAllTasks()
 
 	srv := &http.Server{
 		Addr:    portNumber,
