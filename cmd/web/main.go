@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/Animenkor/ArkhamWebApp/internal/config"
 	"github.com/Animenkor/ArkhamWebApp/internal/handlers"
+	"github.com/Animenkor/ArkhamWebApp/internal/helpers"
 	"github.com/Animenkor/ArkhamWebApp/internal/models"
 	"github.com/Animenkor/ArkhamWebApp/internal/render"
 	"github.com/alexedwards/scs/v2"

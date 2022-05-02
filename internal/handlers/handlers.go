@@ -6,8 +6,8 @@ import (
 	"github.com/Animenkor/ArkhamWebApp/internal/config"
 	"github.com/Animenkor/ArkhamWebApp/internal/forms"
 	"github.com/Animenkor/ArkhamWebApp/internal/helpers"
-	"github.com/Animenkor/ArkhamWebApp/models"
-	"github.com/Animenkor/ArkhamWebApp/render"
+	"github.com/Animenkor/ArkhamWebApp/internal/models"
+	"github.com/Animenkor/ArkhamWebApp/internal/render"
 	"net/http"
 )
 
