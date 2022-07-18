@@ -51,6 +51,6 @@ func sendMsg(m models.MailData) {
 	if err != nil {
 		log.Println(err)
 	} else {
-		log.Println("Email sent")
+		log.Println("Email sent!")
 	}
 }

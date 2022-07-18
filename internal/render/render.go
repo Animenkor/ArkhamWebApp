@@ -8,6 +8,7 @@ import (
 	"github.com/Animenkor/ArkhamWebApp/internal/models"
 	"github.com/justinas/nosurf"
 	"html/template"
+	"log"
 	"net/http"
 	"path/filepath"
 	"time"
@@ -44,7 +45,7 @@ func NewRenderer(a *config.AppConfig) {
 
 //HumanDate returns time in DD.MM.YYYY format
 func HumanDate(t time.Time) string {
-	return t.Format("02.01.2006")
+	return t.Format("2006-01-02")
 }
 
 //FormatDate formats a date to a string
@@ -55,8 +56,8 @@ func FormatDate(t time.Time, f string) string {
 // AddDefaultData adds data for all templates
 func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
 	td.Flash = app.Session.PopString(r.Context(), "flash")
-	td.Warning = app.Session.PopString(r.Context(), "warning")
 	td.Error = app.Session.PopString(r.Context(), "error")
+	td.Warning = app.Session.PopString(r.Context(), "warning")
 	td.CSRFToken = nosurf.Token(r)
 	if app.Session.Exists(r.Context(), "user_id") {
 		td.IsAuthenticated = 1
@@ -72,29 +73,31 @@ func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.Te
 		// get the template cache from the app config
 		tc = app.TemplateCache
 	} else {
+		// this is just used for testing, so that we rebuild
+		// the cache on every request
 		tc, _ = CreateTemplateCache()
 	}
 
 	t, ok := tc[tmpl]
 	if !ok {
-		//log.Fatal("Could not get template from template cache")
-		return errors.New("could not get template from cache")
+		return errors.New("can't get template from cache")
 	}
 
 	buf := new(bytes.Buffer)
 
 	td = AddDefaultData(td, r)
 
-	_ = t.Execute(buf, td)
-
-	_, err := buf.WriteTo(w)
+	err := t.Execute(buf, td)
 	if err != nil {
-		fmt.Println("error writing template to browser", err)
+		log.Fatal(err)
+	}
+	_, err = buf.WriteTo(w)
+	if err != nil {
+		fmt.Println("Error writing template to browser", err)
 		return err
 	}
 
 	return nil
-
 }
 
 // CreateTemplateCache creates a template cache as a map

@@ -28,7 +28,7 @@ func ConnectSQL(dsn string) (*DB, error) {
 	}
 
 	d.SetMaxOpenConns(maxOpenDbConn)
-	d.SetConnMaxIdleTime(maxIdleDbConn)
+	d.SetMaxIdleConns(maxIdleDbConn)
 	d.SetConnMaxLifetime(maxDbLifetime)
 
 	dbConn.SQL = d

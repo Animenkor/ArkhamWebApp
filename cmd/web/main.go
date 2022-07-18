@@ -23,7 +23,7 @@ var session *scs.SessionManager
 var infoLog *log.Logger
 var errorLog *log.Logger
 
-// main is the main function
+// main is the main application function
 func main() {
 	db, err := run()
 	if err != nil {
@@ -44,9 +44,7 @@ func main() {
 	}
 
 	err = srv.ListenAndServe()
-	if err != nil {
-		log.Fatal(err)
-	}
+	log.Fatal(err)
 }
 
 func run() (*driver.DB, error) {
@@ -84,7 +82,7 @@ func run() (*driver.DB, error) {
 	if err != nil {
 		log.Fatal("Cannot connect to database! Dying...")
 	}
-	log.Println("Connected successfully")
+	log.Println("Connected to database!")
 
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
